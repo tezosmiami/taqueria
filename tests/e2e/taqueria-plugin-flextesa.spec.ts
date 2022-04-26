@@ -1,9 +1,8 @@
-import {generateTestProject, getContainerName} from "./utils/utils";
+import { generateTestProject, getContainerName, isPortReachable } from "./utils/utils";
 import fsPromises from "fs/promises"
 import { exec as exec1, execSync } from "child_process"
 import util from "util"
 const exec = util.promisify(exec1)
-import {isPortReachable} from "./utils/utils";
 
 
 const taqueriaProjectPath = 'e2e/auto-test-flextesa-plugin';
@@ -59,7 +58,7 @@ describe("E2E Testing for taqueria flextesa plugin",  () => {
             const sandboxStart = await exec(`taq start sandbox ${dockerName}`, {cwd: `./${taqueriaProjectPath}`})
 
             // 2. Verify that sandbox has been started and taqueria returns proper message into console
-            expect(sandboxStart.stdout).toContain("Started local.");
+            expect(sandboxStart.stdout).toContain(`Started ${dockerName}.`);
 
             // 3. Verify that docker container has been started
             const dockerContainerTest = getContainerName(dockerName);
@@ -73,7 +72,7 @@ describe("E2E Testing for taqueria flextesa plugin",  () => {
             const sandboxStop = await exec(`taq stop sandbox ${dockerName}`, {cwd: `./${taqueriaProjectPath}`})
 
             // 5. Verify that taqueria returns proper message into console
-            expect(sandboxStop.stdout).toContain("Stopped local.");
+            expect(sandboxStop.stdout).toContain(`Stopped ${dockerName}.`);
             isReachable = await isPortReachable(20000, {host: 'localhost'})
             expect(isReachable).toBeFalsy();
 
