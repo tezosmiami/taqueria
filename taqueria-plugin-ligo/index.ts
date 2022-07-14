@@ -23,11 +23,6 @@ Plugin.create(i18n => ({
 					flag: 'syntax',
 					description: 'The syntax used in the contract',
 				}),
-				Option.create({
-					shortFlag: 'i',
-					flag: 'infer',
-					description: 'Enable type inference',
-				}),
 			],
 			handler: 'proxy',
 			encoding: 'json',

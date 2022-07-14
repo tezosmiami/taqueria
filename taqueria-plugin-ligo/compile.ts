@@ -29,7 +29,7 @@ const getCompileCommand = (opts: Opts) =>
 		const baseCommand =
 			`DOCKER_DEFAULT_PLATFORM=linux/amd64 docker run --rm -v \"${projectDir}\":/project -w /project -u $(id -u):$(id -g) ligolang/ligo:next compile contract ${inputFile}`;
 		const entryPoint = opts.entrypoint ? `-e ${opts.entrypoint}` : '';
-		const syntax = opts['syntax'] ? `-s ${opts['syntax']} : ""` : '';
+		const syntax = opts.syntax ? `--syntax ${opts.syntax}` : '';
 		const outFile = `-o ${getContractArtifactFilename(opts)(sourceFile)}`;
 		const cmd = `${baseCommand} ${entryPoint} ${syntax} ${outFile}`;
 		return cmd;
