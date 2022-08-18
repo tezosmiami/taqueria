@@ -76,7 +76,7 @@ When developing multi-file LIGO contracts, you only need to add the file that co
 
 ## Using in a Taqueria Workflow
 
-The `compiile` task is used to produce Michelson code that can be deployed to a sandbox or testnet
+The `compile` task is used to produce Michelson code that can be deployed to a sandbox or testnet
 
 :::note
 Support for mainnet will be coming soon
